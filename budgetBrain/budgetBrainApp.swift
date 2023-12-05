@@ -13,5 +13,6 @@ struct budgetBrainApp: App {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(for: Bucket.self)
     }
 }
