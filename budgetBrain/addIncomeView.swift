@@ -28,7 +28,7 @@ struct AddIncomeView: View {
                         
                         Spacer()
                         
-                        Text(formatCurrency(value: income))
+                        Text(income * bucket.percent, format: .currency(code: "USD"))
                     }
                 }
             }
@@ -42,26 +42,11 @@ struct AddIncomeView: View {
         }
     }
     
-    // Function to format a Decimal as currency
-    func formatCurrency(value: Double) -> String {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency // Set to currency style
-        formatter.locale = Locale.current  // Adjusts to the current locale (you can set to specific locale if needed)
-        // Convert Decimal to NSNumber
-        let number = NSNumber(value: value / Double(buckets.count))
-        
-        // Format and return the string
-        return formatter.string(from: number) ?? "N/A"
-    }
-    
-    // Function to distribute income
+    // Function to distribute and save income to each bucket
     func distributeIncome() {
-        let distribution = Decimal(income) / Decimal(buckets.count)
         for bucket in buckets {
-            bucket.amount += distribution
+            bucket.amount += Decimal(income * bucket.percent)
         }
-            
-        // Here, you might need to save the updated buckets back to your model context
     }
 }
 

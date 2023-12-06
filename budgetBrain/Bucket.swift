@@ -12,10 +12,12 @@ import SwiftData
 class Bucket {
     var name: String
     var amount: Decimal
+    var percent: Double
     
-    init(name: String, amount: Decimal) {
+    init(name: String, amount: Decimal, percent: Double) {
         self.name = name
         self.amount = amount
+        self.percent = percent
     }
     
     func distributionRule() {
