@@ -14,6 +14,8 @@ class Bucket {
     var amount: Decimal
     var percent: Double
     
+    @Relationship(deleteRule: .cascade) var transactions = [Transaction]()
+    
     init(name: String, amount: Decimal, percent: Double) {
         self.name = name
         self.amount = amount

@@ -14,18 +14,21 @@ struct ContentView: View {
     
     @State private var showingAddBucketView = false
     @State private var showingAddIncomeView = false
+    @State private var showingAddTransactionView = false
     
     var body: some View {
         NavigationStack {
             List {
                 Section {
                     ForEach(buckets) { bucket in
-                        HStack {
-                            Text(bucket.name)
-                            
-                            Spacer()
-                            
-                            Text(formatCurrency(bucket.amount))
+                        NavigationLink(value: bucket) {
+                            HStack {
+                                Text(bucket.name)
+                                
+                                Spacer()
+                                
+                                Text(bucket.amount, format: .currency(code: "USD"))
+                            }
                         }
                     }
                     .onDelete(perform: deleteBuckets)
@@ -37,7 +40,10 @@ struct ContentView: View {
                     }
                 }
             }
-            .navigationTitle("Bucket Overview")
+            .navigationTitle("Buckets")
+            .navigationDestination(for: Bucket.self) { bucket in
+                bucketDetailView(bucket: bucket)
+            }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     EditButton()
@@ -53,7 +59,7 @@ struct ContentView: View {
                 addBucketView()
             }
             .sheet(isPresented: $showingAddIncomeView) {
-                AddIncomeView()
+                addIncomeView()
             }
         }
     }
@@ -63,18 +69,6 @@ struct ContentView: View {
             let bucket = buckets[offset]
             modelContext.delete(bucket)
         }
-    }
-    
-    // Function to format a Decimal as currency
-    func formatCurrency(_ value: Decimal) -> String {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency // Set to currency style
-        formatter.locale = Locale.current  // Adjusts to the current locale (you can set to specific locale if needed)
-        // Convert Decimal to NSNumber
-        let number = NSDecimalNumber(decimal: value)
-            
-        // Format and return the string
-        return formatter.string(from: number) ?? "N/A"
     }
 }
 
