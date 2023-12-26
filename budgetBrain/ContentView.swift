@@ -16,6 +16,15 @@ struct ContentView: View {
     @State private var showingAddIncomeView = false
     @State private var showingAddTransactionView = false
     
+    func totalAmount() -> Decimal {
+        var sum: Decimal = 0.0
+        
+        for bucket in buckets {
+            sum += bucket.amount
+        }
+        return sum
+    }
+    
     var body: some View {
         NavigationStack {
             List {
@@ -40,7 +49,7 @@ struct ContentView: View {
                     }
                 }
             }
-            .navigationTitle("Buckets")
+            .navigationTitle("Buckets \(totalAmount(), format: .currency(code: "USD"))")
             .navigationDestination(for: Bucket.self) { bucket in
                 bucketDetailView(bucket: bucket)
             }
