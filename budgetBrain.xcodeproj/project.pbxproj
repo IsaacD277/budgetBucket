@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B50DA992B3B9AC6002F426B /* transactionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B50DA982B3B9AC6002F426B /* transactionDetailView.swift */; };
 		6B9C37B62B1FD9BE00AB558C /* budgetBrainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9C37B52B1FD9BE00AB558C /* budgetBrainApp.swift */; };
 		6B9C37B82B1FD9BE00AB558C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9C37B72B1FD9BE00AB558C /* ContentView.swift */; };
 		6B9C37BA2B1FD9BF00AB558C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B9C37B92B1FD9BF00AB558C /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6B50DA982B3B9AC6002F426B /* transactionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = transactionDetailView.swift; sourceTree = "<group>"; };
 		6B9C37B22B1FD9BE00AB558C /* budgetBrain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = budgetBrain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B9C37B52B1FD9BE00AB558C /* budgetBrainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = budgetBrainApp.swift; sourceTree = "<group>"; };
 		6B9C37B72B1FD9BE00AB558C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				6B9C37C52B1FDB5300AB558C /* addBucketView.swift */,
 				6BE0AB262B3555AE0054A5B4 /* bucketDetailView.swift */,
 				6BB555742B3660ED0017F4A7 /* sortedTransactionList.swift */,
+				6B50DA982B3B9AC6002F426B /* transactionDetailView.swift */,
 				6BF36B042B36878500A10845 /* SwiftData Models */,
 				6B9C37B92B1FD9BF00AB558C /* Assets.xcassets */,
 				6B9C37BB2B1FD9BF00AB558C /* Preview Content */,
@@ -169,6 +172,7 @@
 				6BB83B162B28B1B600006906 /* Transaction.swift in Sources */,
 				6BE0AB272B3555AE0054A5B4 /* bucketDetailView.swift in Sources */,
 				6B9C37C42B1FDB3800AB558C /* addIncomeView.swift in Sources */,
+				6B50DA992B3B9AC6002F426B /* transactionDetailView.swift in Sources */,
 				6B9C37C82B1FDB6B00AB558C /* Bucket.swift in Sources */,
 				6B9C37B62B1FD9BE00AB558C /* budgetBrainApp.swift in Sources */,
 			);
