@@ -30,7 +30,7 @@ struct ContentView: View {
             List {
                 Section {
                     ForEach(buckets) { bucket in
-                        NavigationLink(value: bucket) {
+                        NavigationLink(destination: bucketDetailView(bucket: bucket)) {
                             HStack {
                                 Text(bucket.name)
                                 
@@ -50,9 +50,9 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("Buckets \(totalAmount(), format: .currency(code: "USD"))")
-            .navigationDestination(for: Bucket.self) { bucket in
-                bucketDetailView(bucket: bucket)
-            }
+//            .navigationDestination(for: Bucket.self) { bucket in
+//                bucketDetailView(bucket: bucket)
+//            }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     EditButton()
@@ -81,6 +81,12 @@ struct ContentView: View {
     }
 }
 
-#Preview {
+#Preview("Empty") {
     ContentView()
+}
+
+#Preview("With Data") {
+    let preview = PreviewContainer([Bucket.self])
+    preview.add(items: [Bucket(name: "Tithe", amount: 0.0, percent: 10), Bucket(name: "Investment", amount: 200, percent: 5)])
+    return ContentView().modelContainer(preview.container)
 }

@@ -8,21 +8,23 @@
 import SwiftData
 import SwiftUI
 
-struct sortedTransactionLists: View {
+struct sortedTransactionList: View {
     @Environment (\.modelContext) var modelContext
     @Query var transactions: [Transaction]
     
     var body: some View {
         List {
             ForEach(transactions) { transaction in
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text(transaction.name)
-                            .font(.headline)
-                        Text(transaction.date.formatted(date: .long, time: .omitted))
+                NavigationLink(destination: transactionDetailView(transaction: transaction)) {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(transaction.name)
+                                .font(.headline)
+                            Text(transaction.date.formatted(date: .long, time: .omitted))
+                        }
+                        Spacer()
+                        Text(transaction.amount, format: .currency(code: "USD"))
                     }
-                    Spacer()
-                    Text(transaction.amount, format: .currency(code: "USD"))
                 }
             }
             .onDelete(perform: deleteTransaction)
@@ -46,5 +48,9 @@ struct sortedTransactionLists: View {
 }
 
 #Preview {
-    sortedTransactionLists(sort: SortDescriptor(\Transaction.date), bucket: Bucket(name: "Test", amount: 100.0, percent: 100.0))
+    let preview = PreviewContainer([Bucket.self, Transaction.self])
+    
+    preview.add(items: [Transaction(name: "Lifehouse Donation", amount: 15, date: Date.now, bucket: Bucket.dummy), Transaction(name: "Lifehouse Donation", amount: 25, date: Date.distantFuture, bucket: Bucket.dummy)])
+    
+    return sortedTransactionList(sort: SortDescriptor(\Transaction.date), bucket: Bucket.dummy).modelContainer(preview.container)
 }

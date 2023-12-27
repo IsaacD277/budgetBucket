@@ -16,7 +16,7 @@ class Bucket {
     
     @Relationship(deleteRule: .cascade) var transactions = [Transaction]()
     
-    init(name: String, amount: Decimal, percent: Double) {
+    init(name: String, amount: Decimal = 0.0, percent: Double = 0) {
         self.name = name
         self.amount = amount
         self.percent = percent
@@ -24,5 +24,13 @@ class Bucket {
     
     func distributionRule() {
         // Address different rules here
+    }
+}
+
+extension Bucket {
+    static var dummy: Bucket {
+        .init(name: "Tithe",
+            amount: 250,
+              percent: 0.1)
     }
 }

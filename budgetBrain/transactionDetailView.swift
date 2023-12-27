@@ -15,25 +15,21 @@ struct transactionDetailView: View {
     @State private var editable = false
     
     var body: some View {
-        VStack {
-            Text("Transaction Name: \(transaction.name)")
-            Text("Transaction Amount: \(transaction.amount, format: .currency(code: "USD"))")
-            Text("Transaction Date: \(transaction.date.formatted(date: .complete, time: .omitted))")
-            Text("\(transaction.bucket?.name ?? "Not assigned")")
-            Text("Transaction Notes: \(transaction.notes)")
+        List {
+            Text(transaction.amount, format: .currency(code: "USD"))
+            Text(transaction.date.formatted(date: .complete, time: .omitted))
+            Text(transaction.bucket?.name ?? "Not assigned")
+            
+            Section("Notes") {
+                TextField("Enter some notes about the transaction", text: $transaction.notes, axis: .vertical)
+            }
         }
+        .navigationTitle(transaction.name)
     }
 }
 
-//#Preview {
-//    do {
-//        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-//        let container = try ModelContainer(for: Bucket.self, configurations: config)
-//        let example = Bucket(name: "Tithe", amount: 0.0, percent: 10)
-//        let exampleTransaction = Transaction(name: "Walmart", amount: 100.00, date: Date.now, notes: "It was such a wonderful experience shopping at Walmart for food to take to the red. It will be a lot of food we get to eat. And we will cook some of it over the campfire too!", bucket: example)
-//        return transactionDetailView(transaction: exampleTransaction)
-//            .modelContainer(container)
-//    } catch {
-//        fatalError("Failed to create model container.")
-//    }
-//}
+#Preview {
+    let preview = PreviewContainer([Transaction.self])
+    
+    return transactionDetailView(transaction: Transaction.dummy).modelContainer(preview.container)
+}

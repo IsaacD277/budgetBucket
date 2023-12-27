@@ -65,6 +65,12 @@ struct addIncomeView: View {
     }
 }
 
-#Preview {
+#Preview("Empty") {
     addIncomeView()
+}
+
+#Preview("With Data") {
+    let preview = PreviewContainer([Bucket.self])
+    preview.add(items: [Bucket(name: "Tithe", amount: 0.0, percent: 0.1), Bucket(name: "Investment", amount: 200, percent: 0.05)])
+    return addIncomeView().modelContainer(preview.container)
 }
