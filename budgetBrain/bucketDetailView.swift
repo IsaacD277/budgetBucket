@@ -12,7 +12,6 @@ struct bucketDetailView: View {
     @Environment (\.modelContext) var modelContext
     @Bindable var bucket: Bucket
     
-    
     @State private var sortOrder = SortDescriptor(\Transaction.date)
     
     @State private var name = ""
@@ -25,8 +24,8 @@ struct bucketDetailView: View {
         Form {
             if editable {
                 TextField("Name", text: $bucket.name)
-                TextField("Details", value: $bucket.percent, format: .percent)
-                TextField("Amount", value: $bucket.amount, format: .currency(code: "USD"))
+                TextField("Details", value: $bucket.percent, format: .number)
+                TextField("Amount", value: $bucket.amount, format: .number)
                 Button("Done") {
                     editable = false
                 }
@@ -37,16 +36,17 @@ struct bucketDetailView: View {
                     editable = true
                 }
             }
-                
+            
             Section("Add a new transaction in \(bucket.name)") {
                 TextField("Enter name of transaction", text: $name)
-                TextField("Cost", value: $amount, format: .currency(code: "USD"))
+                TextField("Cost", value: $amount, format: .number)
+                    .keyboardType(.decimalPad)
                 DatePicker("Transaction Date", selection: $date, displayedComponents: .date)
                 Button("Add", action: addTransaction)
             }
             
             Section("Transactions") {
-                sortedTransactionLists(sort: sortOrder, bucket: bucket)
+                sortedTransactionList(sort: sortOrder, bucket: bucket)
             }
         }
         .navigationTitle(bucket.name)
@@ -65,7 +65,7 @@ struct bucketDetailView: View {
             }
         }
     }
-        
+            
     func addTransaction() {
         guard name.isEmpty == false else { return }
         
@@ -75,20 +75,31 @@ struct bucketDetailView: View {
             bucket.transactions.append(transaction)
             bucket.amount -= amount ?? 0.0
             name = ""
-            amount = 0.0
+            amount = nil
             date = Date.now
         }
     }
 }
 
-#Preview {
-    do {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Bucket.self, configurations: config)
-        let example = Bucket(name: "Tithe", amount: 0.0, percent: 10)
-        return bucketDetailView(bucket: example)
-            .modelContainer(container)
-    } catch {
-        fatalError("Failed to create model container.")
-    }
+#Preview("No Transactions") {
+    let preview = PreviewContainer([Bucket.self])
+    
+    return bucketDetailView(bucket: Bucket.dummy).modelContainer(preview.container)
+}
+
+#Preview("With Transaction Data") {
+    let preview = PreviewContainer([Bucket.self])
+    
+    let example1 = Transaction.dummy
+    example1.bucket = Bucket.dummy
+    
+    let example2 = Transaction.dummy
+    example2.bucket = Bucket.dummy
+    
+    let example3 = Transaction.dummy
+    example3.bucket = Bucket.dummy
+    
+    preview.add(items: [example1, example2, example3])
+    
+    return bucketDetailView(bucket: Bucket.dummy).modelContainer(preview.container)
 }
