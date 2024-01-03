@@ -15,17 +15,14 @@ struct addIncomeView: View {
     
     @State private var income: Double?
     
-    @FocusState private var amountIsFocused: Bool
-    
     var body: some View {
         NavigationStack {
             Form {
                 Section {
                     HStack {
                         Image(systemName: "dollarsign.circle")
-                        TextField("Enter Paycheck Amount", value: $income, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                        TextField("Enter Paycheck Amount", value: $income, format: .number)
                             .keyboardType(.decimalPad)
-                            .focused($amountIsFocused)
                     }
                 }
                 
@@ -46,15 +43,11 @@ struct addIncomeView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Distribute", systemImage: "arrow.triangle.branch") {
                         distributeIncome()
-                        amountIsFocused = false
                         dismiss()
                     }
                 }
             }
         }
-        .onAppear(perform: {
-            amountIsFocused = true
-        })
     }
     
     // Function to distribute and save income to each bucket

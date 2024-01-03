@@ -29,18 +29,19 @@ struct ContentView: View {
         NavigationStack {
             List {
                 Section {
-                    ForEach(buckets) { bucket in
-                        NavigationLink(destination: bucketDetailView(bucket: bucket)) {
-                            HStack {
-                                Text(bucket.name)
-                                
-                                Spacer()
-                                
-                                Text(bucket.amount, format: .currency(code: "USD"))
-                            }
-                        }
-                    }
-                    .onDelete(perform: deleteBuckets)
+                    listView()
+//                    ForEach(buckets) { bucket in
+//                        NavigationLink(destination: bucketDetailView(bucket: bucket)) {
+//                            HStack {
+//                                Text(bucket.name)
+//                                
+//                                Spacer()
+//                                
+//                                Text(bucket.amount, format: .currency(code: "USD"))
+//                            }
+//                        }
+//                    }
+//                    .onDelete(perform: deleteBuckets)
                 }
                 
                 Section {

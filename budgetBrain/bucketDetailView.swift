@@ -24,8 +24,8 @@ struct bucketDetailView: View {
         Form {
             if editable {
                 TextField("Name", text: $bucket.name)
-                TextField("Details", value: $bucket.percent, format: .percent)
-                TextField("Amount", value: $bucket.amount, format: .currency(code: "USD"))
+                TextField("Details", value: $bucket.percent, format: .number)
+                TextField("Amount", value: $bucket.amount, format: .number)
                 Button("Done") {
                     editable = false
                 }
@@ -39,7 +39,8 @@ struct bucketDetailView: View {
             
             Section("Add a new transaction in \(bucket.name)") {
                 TextField("Enter name of transaction", text: $name)
-                TextField("Cost", value: $amount, format: .currency(code: "USD"))
+                TextField("Cost", value: $amount, format: .number)
+                    .keyboardType(.decimalPad)
                 DatePicker("Transaction Date", selection: $date, displayedComponents: .date)
                 Button("Add", action: addTransaction)
             }
@@ -74,7 +75,7 @@ struct bucketDetailView: View {
             bucket.transactions.append(transaction)
             bucket.amount -= amount ?? 0.0
             name = ""
-            amount = 0.0
+            amount = nil
             date = Date.now
         }
     }

@@ -15,10 +15,7 @@ struct addBucketView: View {
     @State private var name = ""
     @State private var amount: Double?
     @State private var percent: Double?
-    
-    @FocusState private var isFieldOneFocused: Bool
-    @FocusState private var isFieldTwoFocused: Bool
-    @FocusState private var isFieldThreeFocused: Bool
+    @State private var allowedAmount: Decimal?
     
     var body: some View {
         NavigationStack {
@@ -26,55 +23,21 @@ struct addBucketView: View {
                 Section {
                     TextField("Enter name of bucket", text: $name)
                         .keyboardType(.default)
-                        .submitLabel(.next)
-                        .focused($isFieldOneFocused)
-                        .onAppear(perform: {
-                            isFieldOneFocused = true
-                        })
                     
-                    TextField("Enter percentage of income", value: $percent, format: .percent)
+                    TextField("Enter percentage of income", value: $percent, format: .number)
                         .keyboardType(.decimalPad)
-                        .focused($isFieldTwoFocused)
-                        .toolbar {
-                            ToolbarItemGroup(placement: .keyboard) {
-                                if isFieldTwoFocused {
-                                    Spacer()
-                                    Button("Next") {
-                                        isFieldTwoFocused = false
-                                        isFieldThreeFocused = true
-                                    }
-                                }
-                            }
-                        }
                     
-                    TextField("Initial amount in bucket", value: $amount, format: .currency(code: "USD"))
+                    TextField("Initial amount in bucket", value: $amount, format: .number)
                         .keyboardType(.decimalPad)
-                        .focused($isFieldThreeFocused)
-                        .toolbar {
-                            ToolbarItemGroup(placement: .keyboard) {
-                                if isFieldThreeFocused {
-                                    Spacer()
-                                    Button("Done") {
-                                        isFieldThreeFocused = false
-                                    }
-                                }
-                            }
-                        }
-                } .onSubmit {
-                    if isFieldOneFocused {
-                                    isFieldOneFocused = false
-                                    isFieldTwoFocused = true
-                                } else if isFieldTwoFocused {
-                                    isFieldTwoFocused = false
-                                    isFieldThreeFocused = true
-                                }
+                    TextField("Allowed Amount", value: $allowedAmount, format: .number)
+                        .keyboardType(.decimalPad)
                 }
             }
             .navigationTitle("Add a Bucket")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Save", systemImage: "backpack") {
-                        let newBucket = Bucket(name: name, amount: Decimal(amount ?? 0.0), percent: percent ?? 0.0)
+                        let newBucket = Bucket(name: name, amount: Decimal(amount ?? 0.0), percent: percent ?? 0.0, allowedAmount: allowedAmount ?? 100.0)
                         modelContext.insert(newBucket)
                         dismiss()
                     }
