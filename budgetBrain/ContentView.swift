@@ -14,7 +14,7 @@ struct ContentView: View {
     
     @State private var showingAddBucketView = false
     @State private var showingAddIncomeView = false
-    @State private var showingAddTransactionView = false
+    @State private var showingIncomeList = false
     
     func totalAmount() -> Decimal {
         var sum: Decimal = 0.0
@@ -27,41 +27,21 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            List {
-                Section {
-                    listView()
-//                    ForEach(buckets) { bucket in
-//                        NavigationLink(destination: bucketDetailView(bucket: bucket)) {
-//                            HStack {
-//                                Text(bucket.name)
-//                                
-//                                Spacer()
-//                                
-//                                Text(bucket.amount, format: .currency(code: "USD"))
-//                            }
-//                        }
-//                    }
-//                    .onDelete(perform: deleteBuckets)
-                }
-                
-                Section {
-                    Button("Add Bucket") {
-                        showingAddBucketView.toggle()
-                    }
-                }
+            VStack {
+                listView()
+                    .padding()
             }
             .navigationTitle("Buckets \(totalAmount(), format: .currency(code: "USD"))")
-//            .navigationDestination(for: Bucket.self) { bucket in
-//                bucketDetailView(bucket: bucket)
-//            }
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    EditButton()
-                }
-                
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Add Income", systemImage: "plus") {
                         showingAddIncomeView.toggle()
+                    }
+                }
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Add Bucket", systemImage: "pencil") {
+                        showingAddBucketView.toggle()
+                        // modelContext.insert(Bucket(name: "Just a test"))
                     }
                 }
             }
@@ -73,13 +53,6 @@ struct ContentView: View {
             }
         }
     }
-    
-    func deleteBuckets(at offsets: IndexSet) {
-        for offset in offsets {
-            let bucket = buckets[offset]
-            modelContext.delete(bucket)
-        }
-    }
 }
 
 #Preview("Empty") {
@@ -87,7 +60,7 @@ struct ContentView: View {
 }
 
 #Preview("With Data") {
-    let preview = PreviewContainer([Bucket.self])
-    preview.add(items: [Bucket(name: "Tithe", amount: 0.0, percent: 10), Bucket(name: "Investment", amount: 200, percent: 5)])
+    let preview = PreviewContainer([Bucket.self, Income.self])
+    preview.add(items: [Bucket(name: "Tithe", amount: 64.00, percent: 10), Bucket(name: "Investment", amount: 20.00, percent: 5), Income(amount: 100.0, date: Date.now, source: "Dominion Broadcasting, Inc."), Income.dummy])
     return ContentView().modelContainer(preview.container)
 }

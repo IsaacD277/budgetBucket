@@ -11,8 +11,8 @@ import SwiftUI
 struct budgetBrainApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
         }
-        .modelContainer(for: Bucket.self)
+        .modelContainer(for: [Bucket.self, Income.self])
     }
 }

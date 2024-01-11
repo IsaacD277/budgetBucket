@@ -16,9 +16,15 @@
 		6B9C37C42B1FDB3800AB558C /* addIncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9C37C32B1FDB3800AB558C /* addIncomeView.swift */; };
 		6B9C37C62B1FDB5300AB558C /* addBucketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9C37C52B1FDB5300AB558C /* addBucketView.swift */; };
 		6B9C37C82B1FDB6B00AB558C /* Bucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9C37C72B1FDB6B00AB558C /* Bucket.swift */; };
+		6BAFF00C2B49BBDD0088480E /* sortedIncomeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAFF00B2B49BBDD0088480E /* sortedIncomeList.swift */; };
+		6BAFF00E2B49BC0B0088480E /* Income.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAFF00D2B49BC0B0088480E /* Income.swift */; };
 		6BB555752B3660ED0017F4A7 /* sortedTransactionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB555742B3660ED0017F4A7 /* sortedTransactionList.swift */; };
 		6BB83B162B28B1B600006906 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB83B152B28B1B600006906 /* Transaction.swift */; };
 		6BCFD61E2B3BD2D400FE77C5 /* PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCFD61D2B3BD2D400FE77C5 /* PreviewContainer.swift */; };
+		6BD897842B4BBF7B00B79F6F /* incomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD897832B4BBF7B00B79F6F /* incomeView.swift */; };
+		6BD897862B4BC20700B79F6F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD897852B4BC20700B79F6F /* MainView.swift */; };
+		6BD897882B4BDC3100B79F6F /* incomeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD897872B4BDC3100B79F6F /* incomeDetailView.swift */; };
+		6BDC3FBD2B4F143D00FE13EE /* addTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDC3FBC2B4F143D00FE13EE /* addTransactionView.swift */; };
 		6BE0AB272B3555AE0054A5B4 /* bucketDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE0AB262B3555AE0054A5B4 /* bucketDetailView.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,10 +39,16 @@
 		6B9C37C32B1FDB3800AB558C /* addIncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addIncomeView.swift; sourceTree = "<group>"; };
 		6B9C37C52B1FDB5300AB558C /* addBucketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addBucketView.swift; sourceTree = "<group>"; };
 		6B9C37C72B1FDB6B00AB558C /* Bucket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bucket.swift; sourceTree = "<group>"; };
+		6BAFF00B2B49BBDD0088480E /* sortedIncomeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sortedIncomeList.swift; sourceTree = "<group>"; };
+		6BAFF00D2B49BC0B0088480E /* Income.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Income.swift; sourceTree = "<group>"; };
 		6BB555742B3660ED0017F4A7 /* sortedTransactionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sortedTransactionList.swift; sourceTree = "<group>"; };
 		6BB83B152B28B1B600006906 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		6BCFD61D2B3BD2D400FE77C5 /* PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainer.swift; sourceTree = "<group>"; };
 		6BD77DD12B3CF65600EBFB12 /* ChangeLog.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ChangeLog.md; sourceTree = "<group>"; };
+		6BD897832B4BBF7B00B79F6F /* incomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = incomeView.swift; sourceTree = "<group>"; };
+		6BD897852B4BC20700B79F6F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		6BD897872B4BDC3100B79F6F /* incomeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = incomeDetailView.swift; sourceTree = "<group>"; };
+		6BDC3FBC2B4F143D00FE13EE /* addTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addTransactionView.swift; sourceTree = "<group>"; };
 		6BE0AB262B3555AE0054A5B4 /* bucketDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bucketDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,11 +84,16 @@
 			children = (
 				6BD77DD12B3CF65600EBFB12 /* ChangeLog.md */,
 				6B9C37B52B1FD9BE00AB558C /* budgetBrainApp.swift */,
+				6BD897852B4BC20700B79F6F /* MainView.swift */,
 				6B9C37B72B1FD9BE00AB558C /* ContentView.swift */,
 				6B5FEF752B4343BB0044FFD0 /* listView.swift */,
-				6B9C37C32B1FDB3800AB558C /* addIncomeView.swift */,
-				6B9C37C52B1FDB5300AB558C /* addBucketView.swift */,
 				6BE0AB262B3555AE0054A5B4 /* bucketDetailView.swift */,
+				6B9C37C52B1FDB5300AB558C /* addBucketView.swift */,
+				6BDC3FBC2B4F143D00FE13EE /* addTransactionView.swift */,
+				6B9C37C32B1FDB3800AB558C /* addIncomeView.swift */,
+				6BAFF00B2B49BBDD0088480E /* sortedIncomeList.swift */,
+				6BD897872B4BDC3100B79F6F /* incomeDetailView.swift */,
+				6BD897832B4BBF7B00B79F6F /* incomeView.swift */,
 				6B485F682B38D7510039FA5D /* transactionDetailView.swift */,
 				6BB555742B3660ED0017F4A7 /* sortedTransactionList.swift */,
 				6BF36B042B36878500A10845 /* SwiftData Models */,
@@ -100,6 +117,7 @@
 			children = (
 				6B9C37C72B1FDB6B00AB558C /* Bucket.swift */,
 				6BB83B152B28B1B600006906 /* Transaction.swift */,
+				6BAFF00D2B49BC0B0088480E /* Income.swift */,
 			);
 			path = "SwiftData Models";
 			sourceTree = "<group>";
@@ -174,16 +192,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BDC3FBD2B4F143D00FE13EE /* addTransactionView.swift in Sources */,
 				6B9C37C62B1FDB5300AB558C /* addBucketView.swift in Sources */,
+				6BAFF00E2B49BC0B0088480E /* Income.swift in Sources */,
 				6B5FEF762B4343BB0044FFD0 /* listView.swift in Sources */,
+				6BD897842B4BBF7B00B79F6F /* incomeView.swift in Sources */,
 				6B9C37B82B1FD9BE00AB558C /* ContentView.swift in Sources */,
 				6BB555752B3660ED0017F4A7 /* sortedTransactionList.swift in Sources */,
 				6BB83B162B28B1B600006906 /* Transaction.swift in Sources */,
+				6BAFF00C2B49BBDD0088480E /* sortedIncomeList.swift in Sources */,
 				6BCFD61E2B3BD2D400FE77C5 /* PreviewContainer.swift in Sources */,
 				6BE0AB272B3555AE0054A5B4 /* bucketDetailView.swift in Sources */,
 				6B9C37C42B1FDB3800AB558C /* addIncomeView.swift in Sources */,
 				6B485F692B38D7510039FA5D /* transactionDetailView.swift in Sources */,
+				6BD897862B4BC20700B79F6F /* MainView.swift in Sources */,
 				6B9C37C82B1FDB6B00AB558C /* Bucket.swift in Sources */,
+				6BD897882B4BDC3100B79F6F /* incomeDetailView.swift in Sources */,
 				6B9C37B62B1FD9BE00AB558C /* budgetBrainApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -315,6 +339,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"budgetBrain/Preview Content\"";
@@ -331,8 +356,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.isaacd2.budgetBrain;
+				PRODUCT_BUNDLE_IDENTIFIER = com.isaacd2.pleasework;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -344,6 +370,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"budgetBrain/Preview Content\"";
@@ -360,8 +387,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.isaacd2.budgetBrain;
+				PRODUCT_BUNDLE_IDENTIFIER = com.isaacd2.pleasework;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

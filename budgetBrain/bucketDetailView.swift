@@ -10,24 +10,36 @@ import SwiftUI
 
 struct bucketDetailView: View {
     @Environment (\.modelContext) var modelContext
+    @Environment(\.presentationMode) var presentationMode
     @Bindable var bucket: Bucket
     
-    @State private var sortOrder = SortDescriptor(\Transaction.date)
-    
-    @State private var name = ""
-    @State private var amount: Decimal?
-    @State private var date = Date.now
+    @State private var sortOrder = SortDescriptor(\Transaction.date, order: .reverse)
     
     @State private var editable = false
+    @State private var deleteConfirmation = false
+    @State private var showingAddTransactionView = false
     
     var body: some View {
         Form {
             if editable {
-                TextField("Name", text: $bucket.name)
-                TextField("Details", value: $bucket.percent, format: .number)
-                TextField("Amount", value: $bucket.amount, format: .number)
-                Button("Done") {
-                    editable = false
+                Section("Bucket Name") {
+                    TextField("Name", text: $bucket.name)
+                }
+                Section("Income Percentage") {
+                    Picker("Bucket Percentage", selection: $bucket.percent) {
+                        ForEach(0..<101) { number in
+                            Text(number, format: .percent)
+                        }
+                    }
+                    .pickerStyle(.wheel)
+                }
+                Section("Amount currently in bucket") {
+                    TextField("Amount", value: $bucket.amount, format: .number)
+                }
+                Section {
+                    Button("Done") {
+                        editable = false
+                    }
                 }
             } else {
                 Text("Income Percentage: \(bucket.percent, format: .percent)")
@@ -37,46 +49,63 @@ struct bucketDetailView: View {
                 }
             }
             
-            Section("Add a new transaction in \(bucket.name)") {
-                TextField("Enter name of transaction", text: $name)
-                TextField("Cost", value: $amount, format: .number)
-                    .keyboardType(.decimalPad)
-                DatePicker("Transaction Date", selection: $date, displayedComponents: .date)
-                Button("Add", action: addTransaction)
-            }
-            
             Section("Transactions") {
-                sortedTransactionList(sort: sortOrder, bucket: bucket)
+//                if sortedTransactionList(sort: sortOrder, bucket: bucket).transactions.isEmpty {
+//                    VStack {
+//                        Text("It looks like you haven't added any transactions to this bucket yet.")
+//                            .padding()
+//                        
+//                        Button("Add Transaction") {
+//                            showingAddTransactionView.toggle()
+//                        }
+//                        .padding()
+//                        .background(Color(red: 0.59, green: 0.93, blue: 0.83))
+//                        .foregroundStyle(.black)
+//                        .clipShape(RoundedRectangle(cornerRadius: 10.0))
+//                    }
+//                } else {
+                    sortedTransactionList(sort: sortOrder, bucket: bucket)
+//                }
             }
         }
         .navigationTitle(bucket.name)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            Menu("Sort", systemImage: "arrow.up.arrow.down") {
-                Picker("Sort", selection: $sortOrder) {
-                    Text("Name")
-                        .tag(SortDescriptor(\Transaction.name))
-                    Text("Date")
-                        .tag(SortDescriptor(\Transaction.date, order: .reverse))
-                    Text("Amount")
-                        .tag(SortDescriptor(\Transaction.amount, order: .reverse))
+            ToolbarItem(placement: .topBarTrailing) {
+                HStack {
+                    Button("Add Transaction", systemImage: "plus") {
+                        showingAddTransactionView.toggle()
+                    }
+                    if editable {
+                        Button("Delete", systemImage: "trash") {
+                            deleteConfirmation.toggle()
+                        }
+                    } else {
+                        Menu("Sort", systemImage: "arrow.up.arrow.down") {
+                            Picker("Sort", selection: $sortOrder) {
+                                Label("Date", systemImage: "calendar.circle")
+                                    .tag(SortDescriptor(\Transaction.date, order: .reverse))
+                                Label("Name", systemImage: "a.circle")
+                                    .tag(SortDescriptor(\Transaction.name))
+                                Label("Amount", systemImage: "dollarsign.circle")
+                                    .tag(SortDescriptor(\Transaction.amount, order: .reverse))
+                            }
+                            .pickerStyle(.inline)
+                        }
+                    }
                 }
-                .pickerStyle(.inline)
             }
         }
-    }
-            
-    func addTransaction() {
-        guard name.isEmpty == false else { return }
-        
-        withAnimation {
-            let transaction = Transaction(name: name, amount: amount ?? 0.0, date: date)
-            transaction.bucket = bucket
-            bucket.transactions.append(transaction)
-            bucket.amount -= amount ?? 0.0
-            name = ""
-            amount = nil
-            date = Date.now
+        .alert("Delete Bucket?", isPresented: $deleteConfirmation) {
+            Button("Delete", role: .destructive) {
+                modelContext.delete(bucket)
+                presentationMode.wrappedValue.dismiss()
+            }
+        } message: {
+            Text("Are you sure you want to delete this bucket?")
+        }
+        .sheet(isPresented: $showingAddTransactionView) {
+            addTransactionView(bucket: bucket)
         }
     }
 }
@@ -101,5 +130,5 @@ struct bucketDetailView: View {
     
     preview.add(items: [example1, example2, example3])
     
-    return bucketDetailView(bucket: Bucket.dummy).modelContainer(preview.container)
+    return bucketDetailView(bucket: Bucket(name: "Test", percent: 34)).modelContainer(preview.container)
 }

@@ -13,7 +13,8 @@ struct addIncomeView: View {
     @Query(sort: [SortDescriptor(\Bucket.name)]) var buckets: [Bucket]
     @Environment(\.dismiss) var dismiss
     
-    @State private var income: Double?
+    @State private var income: Decimal?
+    @State private var source = ""
     
     var body: some View {
         NavigationStack {
@@ -24,6 +25,7 @@ struct addIncomeView: View {
                         TextField("Enter Paycheck Amount", value: $income, format: .number)
                             .keyboardType(.decimalPad)
                     }
+                    TextField("Source", text: $source)
                 }
                 
                 Section {
@@ -33,7 +35,7 @@ struct addIncomeView: View {
                             
                             Spacer()
                             
-                            Text(Double(income ?? 0.0) * bucket.percent, format: .currency(code: "USD"))
+                            Text((income ?? 0.0) * Decimal(bucket.percent) / 100.0, format: .currency(code: "USD"))
                         }
                     }
                 }
@@ -43,6 +45,7 @@ struct addIncomeView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Distribute", systemImage: "arrow.triangle.branch") {
                         distributeIncome()
+                        modelContext.insert(Income(amount: income ?? 0.0, date: Date.now, source: source))
                         dismiss()
                     }
                 }
@@ -53,7 +56,7 @@ struct addIncomeView: View {
     // Function to distribute and save income to each bucket
     func distributeIncome() {
         for bucket in buckets {
-            bucket.amount += Decimal(income ?? 0.0) * Decimal(bucket.percent)
+            bucket.amount += (income ?? 0.0) * Decimal(bucket.percent) / 100
         }
     }
 }
@@ -64,6 +67,6 @@ struct addIncomeView: View {
 
 #Preview("With Data") {
     let preview = PreviewContainer([Bucket.self])
-    preview.add(items: [Bucket(name: "Tithe", amount: 0.0, percent: 0.1), Bucket(name: "Investment", amount: 200, percent: 0.05)])
+    preview.add(items: [Bucket(name: "Tithe", amount: 0.0, percent: 10), Bucket(name: "Investment", amount: 200, percent: 5)])
     return addIncomeView().modelContainer(preview.container)
 }

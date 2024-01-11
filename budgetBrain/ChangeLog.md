@@ -2,6 +2,37 @@
 
 All notable changes to bucketBudget will be documented in this file.
 
+## [v0.1.0] - 2024-01-10
+
+### Added
+
+- added TabView functionality
+- added Income List for all income’s added thus far
+- added image labels to sort options
+- added confirmation message when deleting a bucket
+- added completely new addTransaction screen
+- added textfield to ask for the source of the income when adding income
+- added detail view for all saved income
+- added income storing functionality so now all income will be saved!!
+
+### Changed
+
+- changed default Navigation Stack to custom List View with progress bar
+- changed add transaction to be started from toolbar
+- changed bucket deleting to be within the bucketDetailView instead of the swipe to delete in ContentView()
+- changed sort transactions button to change to delete bucket button when editing
+- changed percents to only work as integers
+- changed “Add Bucket” to be on top bar instead of the main body
+- changed bucketDetailView to function off of an edit button in the toolbar
+
+### Removed
+
+- removed edit button from ContentView()
+
+### Known Issues
+
+- listView() still does not handle negative numbers as hoped
+
 ## [v0.0.1] - 2024-01-03
 
 ### Added
