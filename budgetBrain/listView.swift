@@ -29,7 +29,7 @@ struct listView: View {
                                     .foregroundColor(.clear)
                                     .frame(width: geometry.size.width * CGFloat(bucket.spendingPercentage / 100))
                                     .background(Color(red: 0.59, green: 0.93, blue: 0.83))
-                                    .cornerRadius(10)
+                                    .clipShape(RoundedRectangle(cornerRadius: 10.0))
                             }
                             HStack {
                                 Text("⛽️")

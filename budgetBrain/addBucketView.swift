@@ -14,7 +14,7 @@ struct addBucketView: View {
     
     @State private var name = ""
     @State private var amount: Double?
-    @State private var percent: Double?
+    @State private var percent: Int?
     @State private var allowedAmount: Decimal?
     
     var body: some View {
@@ -37,7 +37,7 @@ struct addBucketView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Save", systemImage: "backpack") {
-                        let newBucket = Bucket(name: name, amount: Decimal(amount ?? 0.0), percent: percent ?? 0.0, allowedAmount: allowedAmount ?? 100.0)
+                        let newBucket = Bucket(name: name, amount: Decimal(amount ?? 0.0), percent: percent ?? 0, allowedAmount: allowedAmount ?? 100.0)
                         modelContext.insert(newBucket)
                         dismiss()
                     }
