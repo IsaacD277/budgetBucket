@@ -12,6 +12,8 @@ struct sortedTransactionList: View {
     @Environment (\.modelContext) var modelContext
     @Query var transactions: [Transaction]
     
+    var bucket: Bucket
+    
     var body: some View {
         List {
             ForEach(transactions) { transaction in
@@ -37,11 +39,14 @@ struct sortedTransactionList: View {
         _transactions = Query(filter: #Predicate {
             $0.bucket?.name == name
         }, sort: [sort])
+        
+        self.bucket = bucket
     }
     
     func deleteTransaction(at offsets: IndexSet) {
         for offset in offsets {
             let transaction = transactions[offset]
+            bucket.amount += transaction.amount
             modelContext.delete(transaction)
         }
     }

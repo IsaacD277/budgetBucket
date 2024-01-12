@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct addTransactionView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     @Bindable var bucket: Bucket
     
     @State private var name = ""
@@ -30,6 +30,7 @@ struct addTransactionView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Add") {
                         addTransaction()
+                        dismiss()
                     }
                 }
             }
