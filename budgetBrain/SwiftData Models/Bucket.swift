@@ -10,7 +10,8 @@ import SwiftData
 
 @Model
 class Bucket {
-    var name: String
+    var id: UUID
+    @Attribute(.unique) var name: String
     var emoji: String
     var amount: Decimal
     var percent: Int
@@ -18,7 +19,8 @@ class Bucket {
     
     @Relationship(deleteRule: .cascade) var transactions = [Transaction]()
     
-    init(name: String, emoji: String, amount: Decimal = 0.0, percent: Int = 0, allowedAmount: Decimal = 100) {
+    init(id: UUID = UUID(), name: String, emoji: String, amount: Decimal = 0.0, percent: Int = 0, allowedAmount: Decimal = 100) {
+        self.id = id
         self.name = name
         self.emoji = emoji
         self.amount = amount
