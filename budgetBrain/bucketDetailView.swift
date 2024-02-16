@@ -23,6 +23,7 @@ struct bucketDetailView: View {
         Form {
             if editable {
                 Section("Bucket Name") {
+                    TextField("Emoji", text: $bucket.emoji)
                     TextField("Name", text: $bucket.name)
                 }
                 Section("Income Percentage") {
@@ -36,36 +37,26 @@ struct bucketDetailView: View {
                 Section("Amount currently in bucket") {
                     TextField("Amount", value: $bucket.amount, format: .number)
                 }
+                Section("Allowed amount") {
+                    TextField("Allowed", value: $bucket.allowedAmount, format: .number)
+                }
                 Section {
                     Button("Done") {
                         editable = false
                     }
                 }
             } else {
+                Text("\(bucket.emoji) \(bucket.name)")
                 Text("Income Percentage: \(bucket.percent, format: .percent)")
                 Text("Amount in bucket: \(bucket.amount, format: .currency(code: "USD"))")
+                Text("Allowed Amount: \(bucket.allowedAmount, format: .currency(code: "USD"))")
                 Button("Edit") {
                     editable = true
                 }
             }
             
             Section("Transactions") {
-//                if sortedTransactionList(sort: sortOrder, bucket: bucket).transactions.isEmpty {
-//                    VStack {
-//                        Text("It looks like you haven't added any transactions to this bucket yet.")
-//                            .padding()
-//                        
-//                        Button("Add Transaction") {
-//                            showingAddTransactionView.toggle()
-//                        }
-//                        .padding()
-//                        .background(Color(red: 0.59, green: 0.93, blue: 0.83))
-//                        .foregroundStyle(.black)
-//                        .clipShape(RoundedRectangle(cornerRadius: 10.0))
-//                    }
-//                } else {
                     sortedTransactionList(sort: sortOrder, bucket: bucket)
-//                }
             }
         }
         .navigationTitle(bucket.name)
@@ -130,5 +121,5 @@ struct bucketDetailView: View {
     
     preview.add(items: [example1, example2, example3])
     
-    return bucketDetailView(bucket: Bucket(name: "Test", percent: 34)).modelContainer(preview.container)
+    return bucketDetailView(bucket: Bucket(name: "Test", emoji: "💰", percent: 34)).modelContainer(preview.container)
 }

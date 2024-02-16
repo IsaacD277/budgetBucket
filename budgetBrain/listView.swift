@@ -32,7 +32,7 @@ struct listView: View {
                                     .clipShape(RoundedRectangle(cornerRadius: 10.0))
                             }
                             HStack {
-                                Text("⛽️")
+                                Text(bucket.emoji)
                                 Text(bucket.name)
                                     .bold()
                                     .foregroundColor(Color(red: 0.14, green: 0.24, blue: 0.30))
@@ -56,6 +56,6 @@ struct listView: View {
 
 #Preview("With Data") {
     let preview = PreviewContainer([Bucket.self])
-    preview.add(items: [Bucket(name: "Tithe", amount: 25.0, percent: 10, allowedAmount: 100.0), Bucket(name: "Investment", amount: 50, percent: 5, allowedAmount: 500.0)])
+    preview.add(items: [Bucket(name: "Tithe", emoji: "⛪️", amount: 25.0, percent: 10, allowedAmount: 100.0), Bucket(name: "Investment", emoji: "💰", amount: 50, percent: 5, allowedAmount: 500.0)])
     return listView().modelContainer(preview.container)
 }

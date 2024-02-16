@@ -50,7 +50,7 @@ struct MainView: View {
     
     preview.add(items: [example1, example2, example3])
     
-    preview.add(items: [Bucket(name: "Tithe", amount: 64.00, percent: 10), Bucket(name: "Investment", amount: 20.00, percent: 5), Income(amount: 105.0, date: Date.now, source: "Dominion Broadcasting, Inc."), Income.dummy])
+    preview.add(items: [Bucket(name: "Tithe", emoji: "⛪️", amount: 64.00, percent: 10), Bucket(name: "Investment", emoji: "💰", amount: 20.00, percent: 5), Income(amount: 105.0, date: Date.now, source: "Dominion Broadcasting, Inc."), Income.dummy])
     
     return MainView().modelContainer(preview.container)
 }

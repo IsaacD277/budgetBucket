@@ -61,6 +61,6 @@ struct ContentView: View {
 
 #Preview("With Data") {
     let preview = PreviewContainer([Bucket.self, Income.self])
-    preview.add(items: [Bucket(name: "Tithe", amount: 64.00, percent: 10), Bucket(name: "Investment", amount: 20.00, percent: 5), Income(amount: 100.0, date: Date.now, source: "Dominion Broadcasting, Inc."), Income.dummy])
+    preview.add(items: [Bucket(name: "Tithe", emoji: "⛪️", amount: 64.00, percent: 10), Bucket(name: "Investment", emoji: "💰", amount: 20.00, percent: 5), Income(amount: 100.0, date: Date.now, source: "Dominion Broadcasting, Inc."), Income.dummy])
     return ContentView().modelContainer(preview.container)
 }
